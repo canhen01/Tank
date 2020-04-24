@@ -3,7 +3,7 @@
 //
 
 #pragma once
-#include"Game.h"
+
 
 class CMainFrame : public CFrameWnd  //窗口类
 {
@@ -35,11 +35,6 @@ protected:
 
 	int m_iwidth = 800;
 	int m_iheight = 600;
-
-	enum ETimerId{ETimerIdGameLoop=1};//定时器ID
-	CGame m_game;//游戏对象
-public:
-	afx_msg void OnTimer(UINT_PTR nIDEvent);
 };
 
 

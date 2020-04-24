@@ -20,7 +20,6 @@ IMPLEMENT_DYNAMIC(CMainFrame, CFrameWnd)
 
 BEGIN_MESSAGE_MAP(CMainFrame, CFrameWnd)
 	ON_WM_CREATE()
-	ON_WM_TIMER()
 	ON_WM_SETFOCUS()
 END_MESSAGE_MAP()
 
@@ -56,26 +55,8 @@ int CMainFrame::OnCreate(LPCREATESTRUCT lpCreateStruct)
 	if (CFrameWnd::OnCreate(lpCreateStruct) == -1)
 		return -1;
 
-	SetTimer(ETimerIdGameLoop, 0, NULL);//启动定时器每次都会进入游戏帧
-	m_game.setHandle(GetSafeHwnd());//设置游戏主窗口句柄
+
 	return 0;
 }
-void CMainFrame::OnTimer(UINT_PTR nIDEvent) {
 
-	switch (nIDEvent)
-	{
-	case ETimerIdGameLoop: {						//记录游戏循环ID
-		static DWORD dwLastUpdate = GetTickCount();//记录本次时刻
-		if (GetTickCount() - dwLastUpdate >= 20)//判断时间间隔
-		{
-			m_game.EnterFrame(GetTickCount());//进入游戏帧处理
-			dwLastUpdate = GetTickCount();//记录时间间隔
-		}
-		break;
-	}
-	default:
-		break;
-	}
-	CFrameWnd::OnTimer(nIDEvent);
-}
 
